@@ -58,12 +58,12 @@ bool word_break_rec(string & s, vector<string> & w, int cut, int j, m_table * dp
         string s_loc = s.substr(cut, i - cut);
         bool in_dict = word_in_dict(s_loc, w);
         if(in_dict) {
-            res = true;
             // If at the end of the string return true
             if(i == j + 1) {
                 return true;
             }
-            res = res && word_break_rec(s, w, i, j, dp);
+            // Check if remaining substring can be split
+            res = word_break_rec(s, w, i, j, dp);
             // If string can be split, stop computation
             if(res) {
                 return true;
