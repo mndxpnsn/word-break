@@ -28,7 +28,7 @@ m_table * get_dp_table(int n) {
     return dp;
 }
 
-void delete_memo_table(m_table * dp) {
+void delete_dp_table(m_table * dp) {
     delete [] dp;
 }
 
@@ -87,7 +87,7 @@ bool word_break(string & s, vector<string> & word_dict) {
     
     bool can_split = word_break_rec(s, word_dict, 0, n, dp);
     
-    delete_memo_table(dp);
+    delete_dp_table(dp);
     
     return can_split;
 }
