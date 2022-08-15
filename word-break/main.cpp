@@ -44,7 +44,7 @@ bool word_in_dict(string s, vector<string> & dict) {
     return res;
 }
 
-bool word_break_rec(string & s, vector<string> & w, int cut, int j, m_table * dp) {
+bool word_break_rec(string & s, vector<string> & w, int cut, int n, m_table * dp) {
 
     bool res = false;
     
@@ -54,16 +54,16 @@ bool word_break_rec(string & s, vector<string> & w, int cut, int j, m_table * dp
     }
     
     // Check if string can be split into words in w
-    for(int i = cut + 1; i <= j + 1; ++i) {
+    for(int i = cut + 1; i <= n; ++i) {
         string s_loc = s.substr(cut, i - cut);
         bool in_dict = word_in_dict(s_loc, w);
         if(in_dict) {
             // If at the end of the string return true
-            if(i == j + 1) {
+            if(i == n) {
                 return true;
             }
             // Check if remaining substring can be split
-            res = word_break_rec(s, w, i, j, dp);
+            res = word_break_rec(s, w, i, n, dp);
             // If string can be split, stop computation
             if(res) {
                 return true;
@@ -85,7 +85,7 @@ bool word_break(string & s, vector<string> & word_dict) {
     // Get memo table
     m_table * dp = get_dp_table(n);
     
-    bool can_split = word_break_rec(s, word_dict, 0, n - 1, dp);
+    bool can_split = word_break_rec(s, word_dict, 0, n, dp);
     
     delete_memo_table(dp);
     
